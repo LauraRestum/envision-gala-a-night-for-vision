@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Program | A Night for Vision</title>
+<meta name="theme-color" content="#0b0b0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+<style>
+:root { --red: #d6232b; color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; background: #0b0b0c; color: #fff; font: 400 1.25rem/1.5 'Montserrat', Arial, sans-serif; display: flex; flex-direction: column; }
+:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.top {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: calc(env(safe-area-inset-top, 0px) + 0.75rem) max(16px, env(safe-area-inset-right, 0px)) 0.75rem max(16px, env(safe-area-inset-left, 0px));
+}
+.top a { color: #fff; font-weight: 600; font-size: 1rem; min-height: 48px; display: flex; align-items: center; }
+.count { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+.page { flex: 1; display: grid; place-items: center; padding: 0 max(8px, env(safe-area-inset-right, 0px)) 0 max(8px, env(safe-area-inset-left, 0px)); min-height: 0; }
+.page img { max-width: 100%; max-height: 100%; height: auto; display: block; border: 1px solid rgba(255,255,255,0.18); }
+.nav {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+  padding: 0.75rem max(16px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 1rem) max(16px, env(safe-area-inset-left, 0px));
+}
+.nav button {
+  min-height: 72px; border-radius: 4px; cursor: pointer; font: 700 1.05rem 'Montserrat', Arial, sans-serif;
+  letter-spacing: 0.12em; text-transform: uppercase; border: 2px solid #fff; background: transparent; color: #fff;
+}
+.nav button.next { background: var(--red); border-color: var(--red); }
+.nav button:disabled { opacity: 0.35; cursor: default; }
+.hint { text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.8); padding: 0 16px; }
+@media (orientation: landscape) and (max-height: 500px) { .nav button { min-height: 52px; } .hint { display: none; } }
+</style>
+</head>
+<body>
+<div class="top">
+  <a href="index.html">&larr; Back to the films</a>
+  <span class="count" id="count" aria-live="polite"></span>
+</div>
+<main class="page">
+  <img id="pg" src="program/page-01.jpg" alt="" width="1200" height="918">
+</main>
+<p class="hint">Turn your phone sideways or pinch to make it bigger.</p>
+<div class="nav">
+  <button type="button" id="prev">&lsaquo; Back</button>
+  <button type="button" id="next" class="next">Next &rsaquo;</button>
+</div>
+
+<script>
+/* One entry per page of the printed program (program/page-01.jpg and on).
+   The text is read aloud to people using a screen reader. */
+var PAGES = [
+  "Cover. Envision Gala 2026, A Night for Vision. Saturday, October 24, 2026, Wichita Art Museum.",
+  "Envision Gala, presented by High Touch Technologies. Thank you to High Touch Technologies for making tonight possible.",
+  "Vision for the Future. Thank you for being here tonight. For more than 90 years, Envision has created opportunities for people who are blind or have low vision to learn, grow, work, and live with greater independence. Tonight, we celebrate the impact we have made together and invest in what comes next.",
+  "Program. 5:30 PM, Registration, Cocktails and Sensory Experiences: Innovative Assistive Technology and Tactile Art Experiences in the Beren Room; spirits by R&J Liquor and wine by ABC Discount Liquor. 6:30 PM, Welcome and Purpose of the Night, National Anthem, Invocation, Spirit of Philanthropy Award presented to 6 Meridian. 7:00 PM, Dinner served by Scotch and Sirloin. 7:30 PM, The Envision Journey. 7:45 PM, Fund-A-Need, Aruba Chance Drawing Winner. 8:30 PM, Program Ends.",
+  "Menu. Salad: spring mix, tomato, cucumber, feta cheese and walnuts, topped with an herbal dressing. Entree: sliced Sterling Silver roasted tenderloin topped with a crab cake and finished with a Bearnaise sauce, with herbal roasted potatoes, grilled asparagus and carrots. Dessert: flourless chocolate cake topped with chocolate ganache and a chocolate mousse. Dinner by Scotch and Sirloin. Spirits by R&J Liquor. Wine by ABC Discount Liquor.",
+  "In the Beren Room. Innovative Assistive Technology Experience, presented by the Envision Vision Rehabilitation Center: a guided demonstration of Meta smart glasses. Tactile Art Experience, presented by Envision Arts: tactile works to experience through touch. Experiences sponsored by High Touch Technologies, Forvis Mazars, 6 Meridian, Hutton, IMA and Summit Films.",
+  "Our Featured Guests, with photos. Meet Aubree, who has grown up within the Envision community, from childhood through her most recent experience at Level Up. Meet Adah, who grew up within the Envision community and returned as a volunteer intern at the Envision Child Development Center.",
+  "See Their Stories on Screen Tonight, with photos. Meet Hashim, part of the Envision community since childhood and now a college graduate. Meet Steven, part of the Envision community for nearly 25 years, as a participant and a longtime member of the Envision workforce.",
+  "Fund-A-Need, Your Impact. 100 percent of donations go directly to mission services for people who are blind or have low vision. $50,000 will fund hundreds of low vision rehabilitation appointments. $25,000 can support research at the Envision Research Institute.",
+  "Fund-A-Need, continued. $15,000 will cover a year's tuition for an infant at the Envision Child Development Center. $10,000 will fund transportation for teens to attend Level Up. $5,000 will provide career training through the Workforce Innovation Center.",
+  "Fund-A-Need, continued. $2,500 will provide supplies for the Envision Arts Program. $1,500 will provide a year's worth of meals for a child at the Envision Child Development Center. $500 will provide a white cane and orientation and mobility services.",
+  "Fund-A-Need Paddle Drop. $200 will cover registration and supplies for a child to attend Heather's Camp. Raise your paddle, then drop your bidder number in the basket.",
+  "Aruba Chance Drawing: Seven Days in Aruba. A two-suite luxury villa for up to six people at Marriott's Aruba Surf Club, plus a $2,000 airfare credit. $200 per ticket, only 100 available. Donated by Michael and Teri Monteferrante and Patrick and Becky Tuttle.",
+  "Advertisement from High Touch Technologies, presenting sponsor: proud to support Envision as Presenting Sponsor of the 2026 A Night for Vision Gala. hightouchinc.com.",
+  "Thank You to Our Sponsors. Presenting Sponsor: High Touch Technologies, Inc. Corporate Partners: Allen Exploration, LC Industries Foundation, S.P. Richards Company. Platinum: Forvis Mazars, LLP. Diamond: 6 Meridian, Hutton, IMA, Inc., Summit Films. Gold: INTRUST Bank, N.A. Silver: Account Recovery Specialists, Inc., ADS, Inc., Atlas Electric, LLC, Bank of America, Belleville Boot Company, Blue Cross and Blue Shield of Kansas, Corza Ophthalmology, Eby Construction Company, Emprise Bank, Enza Financial, LLC, John and Julie Dombo, Massif, Novolex, Pitt Plastics, R.K. Black, Inc., Vornado Air.",
+  "Envision, Inc. Board of Directors: Sam Williams, Chairman; Bert Denny, Vice Chairman; Kathy Schlein, Secretary; Larry Kimbler; Eric Kraft; Jeff MacDowell; Michael Monteferrante; Bob Ring; Moji Rosson; Tyler Rutstein; Dan Powers. Board Emeritus Member: Randy Summers. Our Mission: to improve the quality of life and provide inspiration and opportunity for people who are blind or have low vision through employment, outreach, rehabilitation, education and research.",
+  "Sponsor advertisements. Forvis Mazars: Celebrating good works, proud to sponsor A Night for Vision. 6 Meridian: Navigating Community Prosperity Together, proud to support the Envision Gala.",
+  "Sponsor advertisements. IMA is proud to celebrate Envision's impact on the Wichita community at this year's Envision Gala. Hutton: Proud to support A Night for Vision.",
+  "Summit Films, proud sponsor of Envision. With Thanks: tonight takes many hands. Thank you to the volunteers who gave their time, and to the Wichita State Delta Gammas, whose service helps make this evening possible.",
+  "Back cover with the Envision logo."
+];
+
+var i = 0, img = document.getElementById('pg'), count = document.getElementById('count'),
+    prev = document.getElementById('prev'), next = document.getElementById('next');
+var m = location.hash.match(/^#page-(\d+)$/);
+if (m) i = Math.min(Math.max(+m[1] - 1, 0), PAGES.length - 1);
+
+function show() {
+  var n = ('0' + (i + 1)).slice(-2);
+  img.src = 'program/page-' + n + '.jpg';
+  img.alt = 'Program page ' + (i + 1) + ': ' + PAGES[i];
+  count.textContent = 'Page ' + (i + 1) + ' of ' + PAGES.length;
+  prev.disabled = i === 0;
+  next.disabled = i === PAGES.length - 1;
+  history.replaceState(null, '', '#page-' + (i + 1));
+  if (i + 1 < PAGES.length) new Image().src = 'program/page-' + ('0' + (i + 2)).slice(-2) + '.jpg';
+}
+function go(d) { var j = i + d; if (j < 0 || j >= PAGES.length) return; i = j; show(); }
+prev.addEventListener('click', function () { go(-1); });
+next.addEventListener('click', function () { go(1); });
+document.addEventListener('keydown', function (e) {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === 'ArrowRight') go(1);
+  if (e.key === 'ArrowLeft') go(-1);
+});
+/* Swipe left or right also turns the page. */
+var x0 = null;
+img.addEventListener('touchstart', function (e) { x0 = e.touches.length === 1 ? e.touches[0].clientX : null; }, { passive: true });
+img.addEventListener('touchend', function (e) {
+  if (x0 === null) return;
+  var dx = e.changedTouches[0].clientX - x0; x0 = null;
+  if (Math.abs(dx) > 60) go(dx < 0 ? 1 : -1);
+});
+show();
+</script>
+</body>
+</html>

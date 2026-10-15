@@ -12,18 +12,32 @@ films and see the program. It is plain HTML with no build step.
 Every push to the production branch redeploys automatically. Other branches get
 their own preview link.
 
-## Updating the page
+## What's here
 
-All content is in one block near the bottom of `index.html`, between
-`CONTENT` and `END CONTENT`:
+- `index.html`: the films, plus a big "View the program" button.
+  The film list (title, length, file name) is the `FILMS` block in the script.
+- `program.html`: the printed program, one page at a time, with Back and Next
+  buttons. Pages are `program/page-01.jpg` to `page-20.jpg`; each page's
+  description for screen readers is in the `PAGES` list.
 
-- `FILMS`: title, length, who appears, a short description, and the video link.
-  Put a public link in `watch` (and `described` for an audio-described cut).
-  YouTube (unlisted is fine), Dropbox links shared as "Anyone with the link",
-  and direct `.mp4` addresses play right on the page. Other links open in a
-  new tab. An empty link shows "Video coming soon".
-- `PROGRAM`: the evening in order. `time` is optional; `film: 1` to `5` adds a
-  "Watch it" link to that film.
-- `SPONSORS`: tier and names.
+## Videos
+
+The files in `videos/` are 960x540 H.264 copies made for phones. The full
+quality masters stay in Dropbox under `Gala Video Production`:
+
+Posters are the matching `.jpg` files.
+
+| File | Source |
+|---|---|
+| `legacy.mp4` | `Legacy Participant - Aubree, Hashim & Steven/FINAL/Legacy_Video_FINAL_1080p.mp4` |
+| `water-street.mp4` | `Water St/FINAL/WaterSt_Gala_Final.mp4` |
+| `heathers-camp.mp4` | `Heathers Camp/Heathers Camp 2026 90 Sec.mp4` (web copy from the asset dashboard) |
+| `full-circle.mp4` | `ECDC - Adah & Teresa/FINALS/ECDC_Adah_FullCircle_FINAL.mp4` (web copy from the asset dashboard) |
+| `full-circle-described.mp4` | `ECDC - Adah & Teresa/FINALS/ECDC_Adah_FullCircle_AUDIO_DESCRIBED_FINAL.mp4` |
+| `level-up.mp4` | `Level Up Video/Level Up 90 Sec.mp4` (web copy from the asset dashboard) |
+
+To replace one, export a new copy with:
+
+    ffmpeg -i MASTER.mp4 -vf scale=960:-2 -c:v libx264 -crf 25 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart videos/NAME.mp4
 
 Nothing else needs to change.
