@@ -6,6 +6,10 @@
 <title>A Night for Vision</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Watch the films and see the program from A Night for Vision, the Envision Gala, October 24, 2026, at the Wichita Art Museum.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="A Night for Vision | Envision Gala 2026">
+<meta property="og:description" content="Watch the films and see the program from the Envision Gala.">
+<meta name="theme-color" content="#002855">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
@@ -152,6 +156,11 @@ main section { padding-block: 2.25rem 0.5rem; }
 .btn svg { flex: none; width: 1.3em; height: 1.3em; fill: currentColor; }
 .btn.secondary { background: transparent; color: var(--accent); border: 2px solid var(--accent); font-size: 0.95em; min-height: 56px; }
 .btn.pending { background: var(--soft); color: var(--muted); font-weight: 600; font-size: 0.9em; border: 0; }
+button.btn { width: 100%; border: 0; font-family: inherit; cursor: pointer; }
+button.btn.secondary { border: 2px solid var(--accent); }
+.screen { position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; }
+.screen video, .screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.open-out { font-size: 0.85em; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
 
 .tip {
   margin-top: 1.25rem; padding: 1rem 1.1rem; border-radius: 12px;
@@ -270,9 +279,12 @@ footer .org { font-weight: 800; color: var(--ink); letter-spacing: 0.14em; text-
    Edit this block to update the page. Nothing else needs to change.
 
    FILM LINKS: paste a public link into `watch` (and `described` for an
-   audio-described cut). YouTube (unlisted is fine), Vimeo, or a Dropbox
-   link set to "Anyone with the link" all work. Leave a link empty ("")
-   and the film shows "Coming soon" instead of a button.
+   audio-described cut). These play right on the page:
+     - YouTube (unlisted is fine), e.g. https://youtu.be/XXXXXXXXXXX
+     - Dropbox, shared as "Anyone with the link" (paste the link as copied)
+     - a direct .mp4 address
+   Any other link (Vimeo, Google Drive) opens in a new tab instead.
+   Leave a link empty ("") and the film shows "Video coming soon".
 */
 var FILMS = [
   {
@@ -356,6 +368,56 @@ var SPONSORS = [
     return a;
   }
 
+  /* Work out how a link can play right on the page.
+     YouTube -> privacy-enhanced embed. Dropbox or a direct .mp4 -> the phone's
+     own video player. Anything else (Vimeo page, etc.) opens in a new tab. */
+  function source(url) {
+    var m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/);
+    if (m) return { kind: 'youtube', id: m[1] };
+    if (/dropbox\.com\//.test(url)) {
+      var u = url.replace(/([?&])dl=0(&|$)/, '$1').replace(/[?&]$/, '');
+      u += (u.indexOf('?') > -1 ? '&' : '?') + 'raw=1';
+      return { kind: 'file', src: u };
+    }
+    if (/\.(mp4|m4v|mov|webm)(\?|#|$)/i.test(url)) return { kind: 'file', src: url };
+    return { kind: 'link' };
+  }
+
+  /* A big Play button that turns into the video when tapped. Nothing loads
+     until then, so the page stays fast on a phone. */
+  function player(url, cls, label, srLabel, title) {
+    var s = source(url);
+    if (s.kind === 'link') return link(url, cls, label, srLabel);
+    var b = el('button', cls);
+    b.type = 'button';
+    b.innerHTML = PLAY;
+    b.appendChild(document.createTextNode(label));
+    b.setAttribute('aria-label', srLabel.replace(' (opens video player)', ''));
+    b.addEventListener('click', function () {
+      var box = el('div', 'screen');
+      if (s.kind === 'youtube') {
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + s.id + '?autoplay=1&rel=0&playsinline=0&cc_load_policy=1';
+        f.title = title;
+        f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+        f.allowFullscreen = true;
+        box.appendChild(f);
+      } else {
+        var v = document.createElement('video');
+        v.src = s.src; v.controls = true; v.preload = 'auto';
+        v.setAttribute('aria-label', title);
+        box.appendChild(v);
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+      }
+      var back = el('a', 'open-out', 'Trouble playing? Open the video in a new window');
+      back.href = url; back.target = '_blank'; back.rel = 'noopener';
+      b.replaceWith(box);
+      box.after(back);
+      (box.querySelector('video, iframe')).focus();
+    });
+    return b;
+  }
+
   var list = document.getElementById('film-list');
   FILMS.forEach(function (f, i) {
     var li = el('li', 'film');
@@ -366,13 +428,14 @@ var SPONSORS = [
     li.appendChild(el('p', 'about', f.about));
     var actions = el('div', 'actions');
     if (f.watch) {
-      actions.appendChild(link(f.watch, 'btn', 'Play video', 'Play video: ' + f.title + ' (opens video player)'));
+      actions.appendChild(player(f.watch, 'btn', 'Play video',
+        'Play video: ' + f.title + ' (opens video player)', f.title));
     } else {
       actions.appendChild(el('p', 'btn pending', 'Video coming soon'));
     }
     if (f.described) {
-      actions.appendChild(link(f.described, 'btn secondary', 'Play with audio description',
-        'Play ' + f.title + ' with audio description (opens video player)'));
+      actions.appendChild(player(f.described, 'btn secondary', 'Play with audio description',
+        'Play ' + f.title + ' with audio description (opens video player)', f.title + ', audio described'));
     }
     li.appendChild(actions);
     list.appendChild(li);
