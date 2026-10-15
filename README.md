@@ -33,7 +33,6 @@ Posters are the matching `.jpg` files.
 | `water-street.mp4` | `Water St/FINAL/WaterSt_Gala_Final.mp4` |
 | `heathers-camp.mp4` | `Heathers Camp/Heathers Camp 2026 90 Sec.mp4` (web copy from the asset dashboard) |
 | `full-circle.mp4` | `ECDC - Adah & Teresa/FINALS/ECDC_Adah_FullCircle_FINAL.mp4` (web copy from the asset dashboard) |
-| `full-circle-described.mp4` | `ECDC - Adah & Teresa/FINALS/ECDC_Adah_FullCircle_AUDIO_DESCRIBED_FINAL.mp4` |
 | `level-up.mp4` | `Level Up Video/Level Up 90 Sec.mp4` (web copy from the asset dashboard) |
 
 To replace one, export a new copy with:

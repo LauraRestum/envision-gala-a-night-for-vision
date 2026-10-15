@@ -20,19 +20,20 @@ body { margin: 0; background: #0b0b0c; color: #fff; font: 400 1.25rem/1.5 'Monts
 }
 .top a { color: #fff; font-weight: 600; font-size: 1rem; min-height: 48px; display: flex; align-items: center; }
 .count { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
-.page { flex: 1; display: grid; place-items: center; padding: 0 max(8px, env(safe-area-inset-right, 0px)) 0 max(8px, env(safe-area-inset-left, 0px)); min-height: 0; }
-.page img { max-width: 100%; max-height: 100%; height: auto; display: block; border: 1px solid rgba(255,255,255,0.18); }
+/* The page fills the width and keeps its shape; object-fit stops any browser from squishing it. */
+.page { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; padding: 0 env(safe-area-inset-right, 0px) 0 env(safe-area-inset-left, 0px); }
+.page img { display: block; width: 100%; max-width: 75rem; height: auto; max-height: 100%; object-fit: contain; }
 .nav {
   display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
   padding: 0.75rem max(16px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 1rem) max(16px, env(safe-area-inset-left, 0px));
 }
 .nav button {
-  min-height: 72px; border-radius: 4px; cursor: pointer; font: 700 1.05rem 'Montserrat', Arial, sans-serif;
+  min-height: 60px; border-radius: 4px; cursor: pointer; font: 700 1.05rem 'Montserrat', Arial, sans-serif;
   letter-spacing: 0.12em; text-transform: uppercase; border: 2px solid #fff; background: transparent; color: #fff;
 }
 .nav button.next { background: var(--red); border-color: var(--red); }
 .nav button:disabled { opacity: 0.35; cursor: default; }
-.hint { text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.8); padding: 0 16px; }
+.hint { text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.8); padding: 0.75rem 16px 0; margin: 0; }
 @media (orientation: landscape) and (max-height: 500px) { .nav button { min-height: 52px; } .hint { display: none; } }
 </style>
 </head>
@@ -42,9 +43,9 @@ body { margin: 0; background: #0b0b0c; color: #fff; font: 400 1.25rem/1.5 'Monts
   <span class="count" id="count" aria-live="polite"></span>
 </div>
 <main class="page">
-  <img id="pg" src="program/page-01.jpg" alt="" width="1200" height="918">
+  <img id="pg" src="program/page-01.jpg" alt="" width="1200" height="917">
 </main>
-<p class="hint">Turn your phone sideways or pinch to make it bigger.</p>
+<p class="hint">Turn your phone sideways or pinch to zoom.</p>
 <div class="nav">
   <button type="button" id="prev">&lsaquo; Back</button>
   <button type="button" id="next" class="next">Next &rsaquo;</button>

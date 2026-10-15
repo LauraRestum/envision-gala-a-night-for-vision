@@ -35,17 +35,18 @@ h1 { font-size: 1.5rem; font-weight: 600; letter-spacing: 0.14em; text-transform
   padding: 0.5rem 1.25rem; border: 0; border-radius: 4px; cursor: pointer; text-decoration: none;
   background: var(--red); color: #fff; font: 700 1rem 'Montserrat', Arial, sans-serif; letter-spacing: 0.12em; text-transform: uppercase;
 }
-.btn.outline { background: transparent; border: 2px solid #fff; min-height: 60px; font-size: 0.85rem; }
 .btn svg { width: 1.4em; height: 1.4em; fill: currentColor; flex: none; }
 .program-btn { padding-block: 1.75rem 0.5rem; }
 
 main h2 { text-align: center; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; margin: 2.5rem 0 1.75rem; }
 main h2::after { content: ""; display: block; width: 3rem; height: 3px; background: var(--red); margin: 0.7rem auto 0; }
-.films { list-style: none; margin: 0; padding: 0; display: grid; gap: 2.5rem; }
-.film { display: grid; gap: 0.75rem; }
+.films { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+/* Each film is a compact row: small player on the left, title and length on the right. */
+.film { display: grid; grid-template-columns: minmax(0, 11rem) 1fr; gap: 1rem; align-items: center; }
 .film video { width: 100%; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--frame); display: block; }
-.film h3 { margin: 0; font-size: 1.35rem; font-weight: 700; }
-.film .len { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red-text); }
+.film h3 { margin: 0 0 0.3rem; font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+.film .len { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red-text); }
+@media (max-width: 400px) { .film { grid-template-columns: 45% 1fr; gap: 0.85rem; } .film h3 { font-size: 1rem; } }
 
 footer { margin-top: 3rem; background: linear-gradient(90deg, #7a0a10, var(--red) 50%, #7a0a10); text-align: center; }
 footer .wrap { padding-block: 1rem calc(env(safe-area-inset-bottom, 0px) + 1rem); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; }
@@ -81,8 +82,7 @@ var FILMS = [
   { title: "The Envision Journey", len: "4 min 42 sec", file: "legacy" },
   { title: "Water Street", len: "2 min 39 sec", file: "water-street" },
   { title: "Heather's Camp", len: "1 min 40 sec", file: "heathers-camp" },
-  { title: "Envision Child Development Center", len: "2 min 41 sec", file: "full-circle",
-    described: "full-circle-described" },
+  { title: "Envision Child Development Center", len: "2 min 41 sec", file: "full-circle" },
   { title: "Level Up", len: "1 min 36 sec", file: "level-up" }
 ];
 
@@ -97,20 +97,10 @@ FILMS.forEach(function (f) {
   v.preload = 'none';
   v.setAttribute('aria-label', f.title);
   li.appendChild(v);
-  var h = document.createElement('h3'); h.textContent = f.title; li.appendChild(h);
-  var p = document.createElement('p'); p.className = 'len'; p.textContent = f.len; li.appendChild(p);
-  if (f.described) {
-    var b = document.createElement('button');
-    b.type = 'button'; b.className = 'btn outline';
-    b.textContent = 'Play with audio description';
-    b.addEventListener('click', function () {
-      v.src = 'videos/' + f.described + '.mp4';
-      v.setAttribute('aria-label', f.title + ', audio described');
-      b.hidden = true;
-      var r = v.play(); if (r && r.catch) r.catch(function () {});
-    });
-    li.appendChild(b);
-  }
+  var t = document.createElement('div');
+  var h = document.createElement('h3'); h.textContent = f.title; t.appendChild(h);
+  var p = document.createElement('p'); p.className = 'len'; p.textContent = f.len; t.appendChild(p);
+  li.appendChild(t);
   list.appendChild(li);
 });
 </script>
