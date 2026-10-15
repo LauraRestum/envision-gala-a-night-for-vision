@@ -9,52 +9,49 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="A Night for Vision | Envision Gala 2026">
 <meta property="og:description" content="Watch the films and see the program from the Envision Gala.">
-<meta name="theme-color" content="#002855">
+<meta name="theme-color" content="#0b0b0c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&family=Allura&display=swap">
 <script>
 /* Restore display choices before paint so nothing flashes. */
 (function(){try{
   var p = JSON.parse(localStorage.getItem('anfv-display') || '{}');
   var r = document.documentElement;
-  if (p.theme === 'light' || p.theme === 'dark') r.setAttribute('data-theme', p.theme);
+  if (p.theme === 'light') r.setAttribute('data-theme', 'light');
   if (p.size) r.setAttribute('data-size', p.size);
 }catch(e){}})();
 </script>
 <style>
-/* Layout: one calm column, big type, two sections (Films, Program) reached from a sticky two-button bar.
-   Built for older guests on phones: 20px base text, 64px buttons, nothing hidden behind gestures. */
+/* Layout: the gala's own screens, made readable on a phone. Black ground with the grainy red glow,
+   wide-tracked Montserrat capitals, a white rule ending in a red point, and red bands top and bottom.
+   The program sits in a white card with a red frame, exactly like the printed program.
+   Built for older guests: 20px base text, 64px buttons, nothing hidden behind gestures. */
 :root {
-  --bg: #f4f6f9;          /* page ground, cool navy-tinted white */
-  --surface: #ffffff;     /* cards */
-  --ink: #002855;         /* Envision navy, 14.6:1 on white */
-  --muted: #53565A;       /* charcoal, 7.4:1 on white */
-  --accent: #003087;      /* primary blue: buttons, links */
-  --on-accent: #ffffff;   /* 11.9:1 on accent */
-  --band: #002855;        /* hero band */
-  --on-band: #ffffff;
-  --on-band-muted: rgba(255,255,255,0.82);
-  --point: #C8102E;       /* gala red point, decorative only */
-  --rule: rgba(0,40,85,0.14);
-  --soft: #e8edf4;        /* disabled / quiet fills */
-  --focus: #003087;
-  --font: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-  --base: 1.25rem;        /* 20px body */
+  --bg: #0b0b0c;            /* gala black */
+  --surface: #151517;       /* framed boxes on the screens */
+  --ink: #ffffff;           /* 19.6:1 on bg */
+  --muted: rgba(255,255,255,0.78);   /* 13:1 on bg */
+  --red: #d6232b;           /* bands, rules, the point; white text on it is 5.1:1 */
+  --red-text: #ff5a61;      /* red words on black, 6.4:1 */
+  --frame: rgba(255,255,255,0.22);
+  --paper: #ffffff;         /* program card */
+  --paper-ink: #141416;     /* 18.6:1 on paper */
+  --paper-red: #b5121b;     /* red words on paper, 7.0:1 */
+  --paper-muted: #44464a;   /* 9.6:1 on paper */
+  --btn: #ffffff;  --on-btn: #0b0b0c;
+  --focus: #ffffff;
+  --glow: url("assets/gala-glow.jpg");
+  --display: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --script: 'Allura', 'Snell Roundhand', 'Brush Script MT', cursive;
+  --base: 1.25rem;          /* 20px body */
+  color-scheme: dark;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #000d2e; --surface: #001852; --ink: #f0f4ff; --muted: rgba(240,244,255,0.78);
-    --accent: #78BE21; --on-accent: #001852; --band: #001852; --on-band: #f0f4ff;
-    --on-band-muted: rgba(240,244,255,0.82); --point: #FF6B3D; --rule: rgba(255,255,255,0.16);
-    --soft: rgba(255,255,255,0.08); --focus: #78BE21; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #000d2e; --surface: #001852; --ink: #f0f4ff; --muted: rgba(240,244,255,0.78);
-  --accent: #78BE21; --on-accent: #001852; --band: #001852; --on-band: #f0f4ff;
-  --on-band-muted: rgba(240,244,255,0.82); --point: #FF6B3D; --rule: rgba(255,255,255,0.16);
-  --soft: rgba(255,255,255,0.08); --focus: #78BE21; color-scheme: dark;
+:root[data-theme="light"] {
+  --bg: #f6f3f2; --surface: #ffffff; --ink: #141416; --muted: #44464a;
+  --red-text: #b5121b; --frame: rgba(20,20,22,0.16);
+  --btn: #b5121b; --on-btn: #ffffff; --focus: #b5121b;
+  color-scheme: light;
 }
 :root[data-size="2"] { --base: 1.45rem; }
 :root[data-size="3"] { --base: 1.7rem; }
@@ -63,147 +60,207 @@
 html { scroll-padding-top: 6.5rem; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--bg); color: var(--ink);
-  font-family: var(--font); font-size: var(--base); line-height: 1.6; font-weight: 500;
+  font-family: var(--display); font-size: var(--base); line-height: 1.6; font-weight: 400;
 }
 .wrap {
-  max-width: 40rem; margin: 0 auto;
+  max-width: 42rem; margin: 0 auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-h1, h2, h3 { line-height: 1.2; text-wrap: balance; margin: 0; }
+h1, h2, h3 { line-height: 1.2; text-wrap: balance; margin: 0; font-weight: 600; }
 p { margin: 0; }
-a { color: var(--accent); }
+a { color: var(--ink); text-underline-offset: 3px; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-
 .skip-link {
   position: absolute; left: 1rem; top: -200px; z-index: 50;
-  background: var(--accent); color: var(--on-accent); padding: 0.8rem 1.2rem;
-  font-weight: 700; border-radius: 6px; text-decoration: none;
+  background: var(--btn); color: var(--on-btn); padding: 0.8rem 1.2rem;
+  font-weight: 700; border-radius: 4px; text-decoration: none;
 }
 .skip-link:focus { top: calc(env(safe-area-inset-top, 0px) + 0.5rem); }
 
-/* Hero */
-.hero { background: var(--band); color: var(--on-band); }
-.hero .wrap { padding-block: 2.25rem 2rem; display: grid; gap: 0.9rem; }
-.eyebrow {
-  font-size: 0.8em; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--on-band-muted);
+/* Red band, as on every gala screen */
+.band {
+  background: linear-gradient(90deg, #7a0a10, var(--red) 50%, #7a0a10); color: #fff;
+  text-align: center; font-weight: 600; font-size: 0.7em; letter-spacing: 0.24em; text-transform: uppercase;
 }
-.hero h1 { font-size: 2.1em; font-weight: 800; letter-spacing: -0.01em; }
-/* The gala's thin white line ending in a red point. */
-.line-point { display: flex; align-items: center; width: 7rem; }
-.line-point::before { content: ""; flex: 1; height: 2px; background: var(--on-band); }
-.line-point::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--point); }
-.hero .when { font-size: 1em; font-weight: 600; }
-.hero .intro { color: var(--on-band-muted); font-size: 0.95em; }
+.band .wrap { padding-block: 0.7rem; }
+
+/* Wide-tracked capitals and the line that ends in a red point */
+.caps { text-transform: uppercase; letter-spacing: 0.2em; }
+.point-line { display: flex; align-items: center; width: 100%; max-width: 22rem; margin-inline: auto; }
+.point-line::before { content: ""; flex: 1; height: 2px; background: currentColor; opacity: 0.9; }
+.point-line::after { content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--red); flex: none; }
+
+/* Hero */
+.hero {
+  position: relative; text-align: center; color: #fff;
+  background: #000 var(--glow) center / cover no-repeat;
+}
+.hero .wrap { padding-block: 2rem 2.5rem; display: grid; gap: 0.85rem; justify-items: center; }
+.logo { width: 9.5rem; height: auto; margin-bottom: 0.5rem; }
+.welcome { font-family: var(--script); font-size: 4.2em; line-height: 0.9; font-weight: 400; margin-bottom: -0.15em; }
+.hero h1 { font-size: 1.55em; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+.hero .sub { font-size: 0.85em; letter-spacing: 0.28em; text-transform: uppercase; font-weight: 400; }
+.hero .when { font-size: 0.8em; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; margin-top: 0.4rem; }
+.hero .intro { font-size: 0.95em; color: rgba(255,255,255,0.86); max-width: 30rem; margin-top: 0.5rem; }
+.presented { font-size: 0.72em; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.86); margin-top: 0.4rem; }
+.presented strong { display: block; font-size: 1.25em; letter-spacing: 0.08em; color: #fff; font-weight: 700; margin-top: 0.2rem; }
 
 /* Sticky section bar */
 .jump {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
-  background: var(--bg); border-bottom: 1px solid var(--rule);
+  background: var(--bg); border-bottom: 1px solid var(--frame);
 }
 .jump .wrap { padding-block: 0.6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
 .jump a {
-  display: flex; align-items: center; justify-content: center; min-height: 56px;
-  border-radius: 10px; border: 2px solid var(--accent); color: var(--accent);
-  font-weight: 700; font-size: 1em; text-decoration: none; background: var(--surface);
+  display: flex; align-items: center; justify-content: center; min-height: 56px; text-align: center;
+  border: 2px solid var(--ink); color: var(--ink); border-radius: 4px;
+  font-weight: 700; font-size: 0.8em; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
 }
-.jump a[aria-current="true"] { background: var(--accent); color: var(--on-accent); }
+.jump a[aria-current="true"] { background: var(--btn); color: var(--on-btn); border-color: var(--btn); }
 
 /* Display options */
 .options { margin-top: 1.25rem; }
 .options summary {
   cursor: pointer; font-weight: 600; font-size: 0.85em; color: var(--muted);
-  min-height: 48px; display: flex; align-items: center; gap: 0.5rem; list-style: none;
+  min-height: 48px; display: flex; align-items: center; gap: 0.6rem; list-style: none;
 }
 .options summary::-webkit-details-marker { display: none; }
-.options summary::before { content: "+"; font-weight: 800; font-size: 1.2em; width: 1em; color: var(--accent); }
+.options summary::before { content: "+"; font-weight: 700; font-size: 1.3em; width: 1em; color: var(--red-text); }
 .options[open] summary::before { content: "\2212"; }
-.opt-panel { display: grid; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; }
+.opt-panel { display: grid; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--frame); }
 .opt-group { display: grid; gap: 0.5rem; }
-.opt-label { font-size: 0.8em; font-weight: 700; color: var(--muted); }
+.opt-label { font-size: 0.72em; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red-text); }
 .opt-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .opt-row button {
-  font: inherit; font-size: 0.9em; font-weight: 700; min-height: 52px; min-width: 64px;
-  padding: 0 1rem; border-radius: 8px; cursor: pointer;
-  background: var(--surface); color: var(--ink); border: 2px solid var(--rule);
+  font: inherit; font-size: 0.9em; font-weight: 600; min-height: 52px; min-width: 64px;
+  padding: 0 1rem; border-radius: 4px; cursor: pointer;
+  background: transparent; color: var(--ink); border: 2px solid var(--frame);
 }
-.opt-row button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.opt-row button[aria-pressed="true"] { background: var(--btn); color: var(--on-btn); border-color: var(--btn); }
 
 /* Sections */
-main section { padding-block: 2.25rem 0.5rem; }
-.section-head { display: grid; gap: 0.4rem; margin-bottom: 1.25rem; }
-.section-head h2 { font-size: 1.6em; font-weight: 800; }
-.section-head p { color: var(--muted); font-size: 0.95em; }
+main section { padding-block: 3rem 0.5rem; }
+.section-head { display: grid; gap: 0.75rem; justify-items: center; text-align: center; margin-bottom: 1.75rem; }
+.section-head h2 { font-size: 1.15em; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; }
+.section-head h2::after { content: ""; display: block; width: 3rem; height: 3px; background: var(--red); margin: 0.75rem auto 0; }
+.section-head p { color: var(--muted); font-size: 0.95em; max-width: 32rem; }
 
-.films { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
-.film {
-  background: var(--surface); border: 1px solid var(--rule); border-radius: 14px;
-  padding: 1.25rem; display: grid; gap: 0.75rem;
+/* Films */
+.films { list-style: none; margin: 0; padding: 0; display: grid; gap: 2.25rem; }
+.film { display: grid; gap: 0.85rem; }
+.tag {
+  justify-self: start; background: var(--red); color: #fff; font-size: 0.66em; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase; padding: 0.35rem 0.7rem;
 }
-.film h3 { font-size: 1.25em; font-weight: 800; }
-.film .length { font-size: 0.85em; font-weight: 700; color: var(--muted); }
-.film .who { font-size: 0.9em; font-weight: 600; }
+.screen {
+  position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9;
+  background: #000 center / cover no-repeat; border: 1px solid var(--frame); overflow: hidden;
+}
+.screen video { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; }
+.screen .big-play {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: 0; cursor: pointer;
+  background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05) 60%);
+  display: grid; place-items: center;
+}
+.big-play span {
+  width: 5rem; height: 5rem; border-radius: 50%; background: rgba(214,35,43,0.92); border: 3px solid #fff;
+  display: grid; place-items: center; box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+}
+.big-play svg { width: 2.2rem; height: 2.2rem; fill: #fff; margin-left: 0.3rem; }
+.film h3 { font-size: 1.3em; font-weight: 700; letter-spacing: 0.02em; }
+.film .meta { font-size: 0.8em; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red-text); }
+.film .who { font-size: 0.95em; font-weight: 600; }
 .film .about { font-size: 0.95em; color: var(--muted); }
-.film .actions { display: grid; gap: 0.6rem; margin-top: 0.25rem; }
+.actions { display: grid; gap: 0.6rem; margin-top: 0.25rem; }
 .btn {
-  display: flex; align-items: center; justify-content: center; gap: 0.7rem;
-  min-height: 64px; padding: 0.5rem 1.25rem; border-radius: 12px;
-  background: var(--accent); color: var(--on-accent); text-decoration: none;
-  font-weight: 800; font-size: 1.05em; text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 0.7rem; width: 100%;
+  min-height: 64px; padding: 0.5rem 1.25rem; border-radius: 4px; border: 0; cursor: pointer;
+  background: var(--btn); color: var(--on-btn); text-decoration: none; font-family: inherit;
+  font-weight: 700; font-size: 0.85em; letter-spacing: 0.14em; text-transform: uppercase; text-align: center;
 }
-.btn svg { flex: none; width: 1.3em; height: 1.3em; fill: currentColor; }
-.btn.secondary { background: transparent; color: var(--accent); border: 2px solid var(--accent); font-size: 0.95em; min-height: 56px; }
-.btn.pending { background: var(--soft); color: var(--muted); font-weight: 600; font-size: 0.9em; border: 0; }
-button.btn { width: 100%; border: 0; font-family: inherit; cursor: pointer; }
-button.btn.secondary { border: 2px solid var(--accent); }
-.screen { position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; }
-.screen video, .screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.open-out { font-size: 0.85em; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+.btn svg { flex: none; width: 1.4em; height: 1.4em; fill: currentColor; }
+.btn.secondary { background: transparent; color: var(--ink); border: 2px solid var(--ink); min-height: 58px; font-size: 0.75em; }
+.btn.pending { background: var(--surface); color: var(--muted); border: 1px solid var(--frame); cursor: default; }
 
 .tip {
-  margin-top: 1.25rem; padding: 1rem 1.1rem; border-radius: 12px;
-  background: var(--soft); font-size: 0.9em; display: grid; gap: 0.4rem;
+  margin-top: 2.25rem; padding: 1.1rem 1.25rem; border: 1px solid var(--frame); background: var(--surface);
+  font-size: 0.9em; display: grid; gap: 0.5rem;
 }
-.tip strong { font-weight: 800; }
+.tip .tip-title { font-size: 0.75em; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red-text); }
 
-/* Program */
-.program { list-style: none; margin: 0; padding: 0; border-left: 3px solid var(--rule); }
-.program li { position: relative; padding: 0 0 1.4rem 1.25rem; display: grid; gap: 0.2rem; }
-.program li::before {
-  content: ""; position: absolute; left: -9px; top: 0.45em; width: 15px; height: 15px;
-  border-radius: 50%; background: var(--bg); border: 3px solid var(--accent);
+/* Program: the printed program's white card with the red frame */
+.card {
+  background: var(--paper); color: var(--paper-ink); border: 6px solid var(--red);
+  padding: 1.75rem 1.25rem; display: grid; gap: 1.5rem;
 }
-.program .time { font-size: 0.85em; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
-.program .item { font-weight: 800; font-size: 1.05em; }
-.program .detail { font-size: 0.9em; color: var(--muted); }
-.program a { font-weight: 700; }
+.card h3 { text-align: center; color: var(--paper-red); font-size: 1em; letter-spacing: 0.24em; text-transform: uppercase; }
+.card h3::after { content: ""; display: block; width: 2.5rem; height: 3px; background: var(--red); margin: 0.6rem auto 0; }
+.schedule { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.35rem; }
+.schedule li { display: grid; gap: 0.15rem; }
+@media (min-width: 30rem) { .schedule li { grid-template-columns: 5.4em 1fr; gap: 0.75rem; align-items: baseline; } }
+.schedule .time { color: var(--paper-red); font-weight: 700; font-size: 1.05em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.schedule .lines { display: grid; gap: 0.2rem; min-width: 0; }
+.schedule .item { font-weight: 700; }
+.schedule .detail { color: var(--paper-muted); font-size: 0.92em; }
+.schedule a { color: var(--paper-red); font-weight: 700; }
+.menu { display: grid; gap: 1.1rem; text-align: center; }
+.menu .course { font-size: 0.8em; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper-red); }
+.menu .dish { color: var(--paper-ink); font-size: 0.95em; }
+.menu .credit { color: var(--paper-muted); font-size: 0.85em; font-style: italic; }
 
-.sponsors { display: grid; gap: 1rem; margin-top: 1rem; }
-.sponsor-tier { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 1.1rem 1.25rem; display: grid; gap: 0.2rem; }
-.sponsor-tier .tier { font-size: 0.75em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-.sponsor-tier .names { font-weight: 800; font-size: 1.1em; }
+.subhead { margin-top: 2.75rem; }
+.beren { display: grid; gap: 1.25rem; }
+.beren .box { border: 1px solid var(--frame); background: var(--surface); padding: 1.25rem; display: grid; gap: 0.5rem; }
+.beren .box h3 { margin: 0; font-size: 0.9em; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+.beren .box .by { font-size: 0.85em; color: var(--red-text); font-weight: 600; }
+.beren .box p { font-size: 0.92em; color: var(--muted); }
+.beren .note { font-size: 0.85em; color: var(--muted); text-align: center; }
 
-footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); }
-footer .wrap { padding-block: 1.75rem 2.5rem; display: grid; gap: 0.6rem; font-size: 0.9em; color: var(--muted); }
-footer .org { font-weight: 800; color: var(--ink); letter-spacing: 0.14em; text-transform: uppercase; }
+.sponsors { display: grid; gap: 1.5rem; }
+.tier { display: grid; gap: 0.4rem; }
+.tier-name { font-size: 0.75em; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red-text); }
+.tier ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.25rem; }
+.tier li { font-size: 1em; }
+.tier.lead li { font-size: 1.15em; font-weight: 700; }
+
+.mission {
+  margin-top: 2.75rem; border: 4px solid var(--red); padding: 1.5rem 1.25rem; text-align: center; display: grid; gap: 0.75rem;
+}
+.mission h2 { font-size: 0.85em; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red-text); }
+.mission p { font-size: 0.95em; }
+
+footer { margin-top: 3rem; }
+footer .wrap { padding-block: 1.75rem 2.25rem; display: grid; gap: 0.85rem; justify-items: center; text-align: center; font-size: 0.9em; color: var(--muted); }
+footer .logo { width: 8rem; margin: 0; }
+:root[data-theme="light"] footer .logo, :root[data-theme="light"] .logo-dark-only { filter: invert(1); }
 
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
+}
+@media (min-width: 40rem) {
+  .beren { grid-template-columns: 1fr 1fr; }
+  .sponsors { grid-template-columns: 1fr 1fr; column-gap: 2rem; }
 }
 </style>
 </head>
 <body>
 <a class="skip-link" href="#films">Skip to the films</a>
 
+<div class="band" aria-hidden="true"><div class="wrap">Envision the Future &middot; Honor the Legacy</div></div>
+
 <header class="hero">
   <div class="wrap">
-    <p class="eyebrow">Envision Gala 2026</p>
+    <img class="logo" src="assets/envision-logo-white.png" alt="Envision" width="647" height="144">
+    <p class="welcome" aria-hidden="true">Welcome</p>
+    <p class="caps" style="font-size:0.7em;letter-spacing:0.3em" aria-hidden="true">to</p>
     <h1>A Night for Vision</h1>
-    <div class="line-point" aria-hidden="true"></div>
-    <p class="when">October 24, 2026 &middot; Wichita Art Museum</p>
-    <p class="intro">Thank you for being part of the evening. Here you can watch the films from the gala and look back at the program, anytime, right from your phone.</p>
+    <p class="sub">Envision Gala 2026</p>
+    <div class="point-line" aria-hidden="true"></div>
+    <p class="when">Saturday, October 24, 2026<br>Wichita Art Museum</p>
+    <p class="intro">Thank you for being here. Watch the films from the evening and look back at the program, right from your phone.</p>
+    <p class="presented">Presented by <strong>High Touch Technologies</strong></p>
   </div>
 </header>
 
@@ -217,22 +274,21 @@ footer .org { font-weight: 800; color: var(--ink); letter-spacing: 0.14em; text-
 <main id="main">
   <div class="wrap">
     <details class="options" id="display-options">
-      <summary>Make the text bigger or change colors</summary>
+      <summary>Make the text bigger or the page brighter</summary>
       <div class="opt-panel">
         <div class="opt-group" role="group" aria-labelledby="size-label">
           <span class="opt-label" id="size-label">Text size</span>
           <div class="opt-row">
-            <button type="button" data-size="1" aria-pressed="true">Normal</button>
-            <button type="button" data-size="2" aria-pressed="false">Large</button>
-            <button type="button" data-size="3" aria-pressed="false">Largest</button>
+            <button type="button" data-size-choice="1" aria-pressed="true">Normal</button>
+            <button type="button" data-size-choice="2" aria-pressed="false">Large</button>
+            <button type="button" data-size-choice="3" aria-pressed="false">Largest</button>
           </div>
         </div>
         <div class="opt-group" role="group" aria-labelledby="theme-label">
-          <span class="opt-label" id="theme-label">Colors</span>
+          <span class="opt-label" id="theme-label">Page color</span>
           <div class="opt-row">
-            <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
-            <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
-            <button type="button" data-theme-choice="auto" aria-pressed="true">Match my phone</button>
+            <button type="button" data-theme-choice="gala" aria-pressed="true">Gala black</button>
+            <button type="button" data-theme-choice="light" aria-pressed="false">Bright white</button>
           </div>
         </div>
       </div>
@@ -240,36 +296,74 @@ footer .org { font-weight: 800; color: var(--ink); letter-spacing: 0.14em; text-
 
     <section id="films" aria-labelledby="films-title">
       <div class="section-head">
-        <h2 id="films-title">The films</h2>
-        <p>Five short films shown during the program. Tap a button to watch. Each one opens in your phone's video player.</p>
+        <h2 id="films-title">See their stories</h2>
+        <p>The five films shown on screen during the evening. Tap the red play button to watch.</p>
       </div>
       <ol class="films" id="film-list"></ol>
 
       <div class="tip">
-        <strong>Tips for watching</strong>
+        <p class="tip-title">Tips for watching</p>
         <p>Turn your phone sideways for a bigger picture.</p>
-        <p>Tap the screen once to show the pause and volume controls.</p>
-        <p>When you are done, use your phone's back button or the "Done" button to come back here.</p>
+        <p>Tap the video once to show the pause and volume controls.</p>
+        <p>When a film ends, tap "Done" or your phone's back button to return to this page.</p>
       </div>
     </section>
 
     <section id="program" aria-labelledby="program-title">
       <div class="section-head">
         <h2 id="program-title">The program</h2>
-        <p>The order of the evening.</p>
       </div>
-      <ol class="program" id="program-list"></ol>
 
-      <h3 class="section-head" style="font-size:1.2em;font-weight:800;margin-top:1.5rem;margin-bottom:0">Thank you to our sponsors</h3>
-      <div class="sponsors" id="sponsor-list"></div>
+      <div class="card">
+        <h3>Program</h3>
+        <ol class="schedule" id="schedule"></ol>
+      </div>
+
+      <div class="card" style="margin-top:1.5rem">
+        <h3>Menu</h3>
+        <div class="menu">
+          <div><p class="course">Salad</p><p class="dish">Spring mix, tomato, cucumber, feta cheese and walnuts, topped with an herbal dressing</p></div>
+          <div><p class="course">Entree</p><p class="dish">Sliced Sterling Silver roasted tenderloin topped with a crab cake and finished with a B&eacute;arnaise sauce, accompanied by herbal roasted potatoes, grilled asparagus and carrots</p></div>
+          <div><p class="course">Dessert</p><p class="dish">Flourless chocolate cake topped with chocolate ganache and a chocolate mousse</p></div>
+          <p class="credit">Dinner by Scotch &amp; Sirloin. Spirits by R&amp;J Liquor. Wine by ABC Discount Liquor.</p>
+        </div>
+      </div>
+
+      <div class="section-head subhead">
+        <h2>In the Beren Room</h2>
+      </div>
+      <div class="beren">
+        <div class="box">
+          <h3>Innovative Assistive Technology Experience</h3>
+          <p class="by">Presented by the Envision Vision Rehabilitation Center</p>
+          <p>Guests experienced Meta smart glasses through a guided demonstration led by Envision's clinical team, and saw how emerging assistive technologies are expanding access, independence and possibility for people who are blind or have low vision.</p>
+        </div>
+        <div class="box">
+          <h3>Tactile Art Experience</h3>
+          <p class="by">Presented by Envision Arts</p>
+          <p>A curated selection of tactile works from the Envision Arts team, inviting guests to experience each piece through touch.</p>
+        </div>
+      </div>
+      <p class="beren note" style="margin-top:1rem">Experiences sponsored by High Touch Technologies, Forvis Mazars, 6 Meridian, Hutton, IMA and Summit Films.</p>
+
+      <div class="section-head subhead">
+        <h2 id="sponsors-title">Thank you to our sponsors</h2>
+      </div>
+      <div class="sponsors" id="sponsor-list" aria-labelledby="sponsors-title"></div>
+
+      <div class="mission">
+        <h2>Our Mission</h2>
+        <p>To improve the quality of life and provide inspiration and opportunity for people who are blind or have low vision through employment, outreach, rehabilitation, education and research.</p>
+      </div>
     </section>
   </div>
 </main>
 
 <footer>
+  <div class="band" aria-hidden="true"><div class="wrap">Thank you for supporting our mission</div></div>
   <div class="wrap">
-    <p class="org">Envision</p>
-    <p>Envision improves the quality of life and provides inspiration and opportunity for people who are blind or have low vision through employment, outreach, rehabilitation, education and research.</p>
+    <img class="logo" src="assets/envision-logo-white.png" alt="Envision" width="647" height="144">
+    <p>Tonight takes many hands. Thank you to the volunteers who gave their time, and to the Wichita State Delta Gammas.</p>
     <p><a href="https://www.envisionus.com/">Visit the Envision website</a></p>
   </div>
 </footer>
@@ -278,76 +372,87 @@ footer .org { font-weight: 800; color: var(--ink); letter-spacing: 0.14em; text-
 /* ===================== CONTENT =====================
    Edit this block to update the page. Nothing else needs to change.
 
-   FILM LINKS: paste a public link into `watch` (and `described` for an
-   audio-described cut). These play right on the page:
-     - YouTube (unlisted is fine), e.g. https://youtu.be/XXXXXXXXXXX
-     - Dropbox, shared as "Anyone with the link" (paste the link as copied)
-     - a direct .mp4 address
-   Any other link (Vimeo, Google Drive) opens in a new tab instead.
-   Leave a link empty ("") and the film shows "Video coming soon".
+   FILMS: `video` is a file in the videos/ folder (served by Vercel), or any
+   public link. YouTube, Dropbox ("Anyone with the link") and .mp4 links play
+   on the page; other links open in a new tab. `described` is the
+   audio-described cut, if there is one. Leave `video` empty ("") and the
+   film shows "Video coming soon".
+   Order matches the evening: The Envision Journey after dinner, the other
+   four during Fund-A-Need.
 */
 var FILMS = [
   {
-    title: "Heather's Camp",
-    length: "About 1½ minutes",
-    who: "",
-    about: "A summer at Heather's Camp, where kids who are blind or have low vision spend a week trying new things alongside friends who get it.",
-    watch: "",
-    described: ""
-  },
-  {
-    title: "Level Up",
-    length: "About 1½ minutes",
-    who: "",
-    about: "Level Up helps teens who are blind or have low vision build independence and get ready for life after high school.",
-    watch: "",
+    title: "The Envision Journey",
+    length: "4 min 42 sec",
+    who: "With Aubree, Hashim and Steven",
+    about: "Three people at three stages of life who have grown up inside Envision programs. Aubree is 13 and just finished her first summer of Level Up. Hashim is a recent Wichita State graduate. Steven has been part of Envision for nearly 25 years, first as a participant and now as a member of the Envision workforce.",
+    video: "videos/legacy.mp4",
+    poster: "videos/legacy.jpg",
     described: ""
   },
   {
     title: "Water Street",
-    length: "About 1½ minutes",
-    who: "With Michael Monteferrante, Envision CEO",
-    about: "A look inside the renovated and expanded Water Street campus in Wichita, and what the new spaces make possible.",
-    watch: "",
+    length: "2 min 39 sec",
+    who: "With Michael Monteferrante, President and CEO",
+    about: "A look inside the renovated and expanded Water Street campus in Wichita, and what the new spaces make possible for the people Envision serves.",
+    video: "videos/water-street.mp4",
+    poster: "videos/water-street.jpg",
     described: ""
   },
   {
-    title: "Full Circle",
-    length: "About 1½ minutes",
-    who: "With Adah and Ms. Teresa, Envision Child Development Center",
+    title: "Heather's Camp",
+    length: "1 min 40 sec",
+    who: "",
+    about: "Adventure, community and memories that last a lifetime at Heather's Camp, Envision's summer camp for kids who are blind or have low vision.",
+    video: "videos/heathers-camp.mp4",
+    poster: "videos/heathers-camp.jpg",
+    described: ""
+  },
+  {
+    title: "Envision Child Development Center",
+    length: "2 min 41 sec",
+    who: "With Adah and Ms. Teresa",
     about: "Adah started at the Envision Child Development Center as a little girl. This summer she came back as a volunteer intern to help the next group of children.",
-    watch: "",
-    described: ""
+    video: "videos/full-circle.mp4",
+    poster: "videos/full-circle.jpg",
+    described: "videos/full-circle-described.mp4"
   },
   {
-    title: "Three Lives, One Story",
-    length: "About 4 minutes",
-    who: "With Aubree, Hashim and Steve",
-    about: "Aubree is 13. Hashim just graduated from college. Steve has been part of Envision for about 25 years. Three people at three stages of life, all grown up inside Envision programs.",
-    watch: "",
+    title: "Level Up",
+    length: "1 min 36 sec",
+    who: "",
+    about: "At Level Up, teens with vision loss explore adaptive technology, college and career options for a successful and independent future.",
+    video: "videos/level-up.mp4",
+    poster: "videos/level-up.jpg",
     described: ""
   }
 ];
 
-/* PROGRAM: one entry per moment of the evening, in order.
-   `time` is optional. Add `film: <number>` (1 to 5, matching the list above)
-   to link a program moment to its film. */
+/* PROGRAM: from the printed program. `film` (1 to 5, matching the list
+   above) adds a "Watch" link to that moment. */
 var PROGRAM = [
-  { time: "", item: "Cocktail hour", detail: "" },
-  { time: "", item: "Welcome", detail: "" },
-  { time: "", item: "Dinner", detail: "" },
-  { time: "", item: "Heather's Camp", detail: "Film", film: 1 },
-  { time: "", item: "Level Up", detail: "Film", film: 2 },
-  { time: "", item: "Water Street", detail: "Film", film: 3 },
-  { time: "", item: "Full Circle", detail: "Film", film: 4 },
-  { time: "", item: "Three Lives, One Story", detail: "Film", film: 5 },
-  { time: "", item: "Closing", detail: "" }
+  { time: "5:30 PM", item: "Registration, Cocktails & Sensory Experiences",
+    details: ["Innovative Assistive Technology and Tactile Art Experiences in the Beren Room",
+              "Spirits by R&J Liquor and wine by ABC Discount Liquor"] },
+  { time: "6:30 PM", item: "Welcome & Purpose of the Night",
+    details: ["Michael Monteferrante, President and CEO, and Molly Edwards-Workman, SVP, Foundation and Mission Services",
+              "National Anthem", "Invocation", "Spirit of Philanthropy Award presented to 6 Meridian"] },
+  { time: "7:00 PM", item: "Dinner", details: ["Served by Scotch & Sirloin"] },
+  { time: "7:30 PM", item: "The Envision Journey", details: [], films: [1] },
+  { time: "7:45 PM", item: "Fund-A-Need", details: ["Aruba Chance Drawing Winner"], films: [2, 3, 4, 5] },
+  { time: "8:30 PM", item: "Program Ends", details: [] }
 ];
 
 var SPONSORS = [
-  { tier: "Presenting sponsor", names: "HighTouch Technologies" },
-  { tier: "Platinum sponsor", names: "Forvis Mazars" },
-  { tier: "Gold sponsor", names: "INTRUST Bank" }
+  { tier: "Presenting Sponsor", names: ["High Touch Technologies, Inc."], lead: true },
+  { tier: "Platinum Level Sponsor", names: ["Forvis Mazars, LLP"] },
+  { tier: "Diamond Level Sponsors", names: ["6 Meridian", "Hutton", "IMA, Inc.", "Summit Films"] },
+  { tier: "Gold Level Sponsor", names: ["INTRUST Bank, N.A."] },
+  { tier: "Corporate Partners", names: ["Allen Exploration", "LC Industries Foundation", "S.P. Richards Company"] },
+  { tier: "Silver Level Sponsors", names: ["Account Recovery Specialists, Inc.", "ADS, Inc.", "Atlas Electric, LLC",
+    "Bank of America", "Belleville Boot Company", "Blue Cross and Blue Shield of Kansas", "Corza Ophthalmology",
+    "Eby Construction Company", "Emprise Bank", "Enza Financial, LLC", "John and Julie Dombo", "Massif",
+    "Novolex", "Pitt Plastics", "R.K. Black, Inc.", "Vornado Air"] }
 ];
 /* =================== END CONTENT =================== */
 
@@ -359,18 +464,10 @@ var SPONSORS = [
     if (text) e.textContent = text;
     return e;
   }
-  function link(href, cls, label, srLabel) {
-    var a = el('a', cls);
-    a.href = href; a.target = '_blank'; a.rel = 'noopener';
-    a.innerHTML = PLAY;
-    a.appendChild(document.createTextNode(label));
-    if (srLabel) a.setAttribute('aria-label', srLabel);
-    return a;
-  }
 
-  /* Work out how a link can play right on the page.
-     YouTube -> privacy-enhanced embed. Dropbox or a direct .mp4 -> the phone's
-     own video player. Anything else (Vimeo page, etc.) opens in a new tab. */
+  /* How a link can play. YouTube -> privacy-enhanced embed. A file in this
+     site, Dropbox, or a direct .mp4 -> the phone's own video player.
+     Anything else opens in a new tab. */
   function source(url) {
     var m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/);
     if (m) return { kind: 'youtube', id: m[1] };
@@ -379,92 +476,122 @@ var SPONSORS = [
       u += (u.indexOf('?') > -1 ? '&' : '?') + 'raw=1';
       return { kind: 'file', src: u };
     }
-    if (/\.(mp4|m4v|mov|webm)(\?|#|$)/i.test(url)) return { kind: 'file', src: url };
+    if (!/^https?:/i.test(url) || /\.(mp4|m4v|mov|webm)(\?|#|$)/i.test(url)) return { kind: 'file', src: url };
     return { kind: 'link' };
   }
 
-  /* A big Play button that turns into the video when tapped. Nothing loads
-     until then, so the page stays fast on a phone. */
-  function player(url, cls, label, srLabel, title) {
+  /* Swap the poster for the video and start it. On iPhone this opens the
+     full-screen player, which is the easiest view for older eyes. */
+  function play(screen, url, title, fallback) {
     var s = source(url);
-    if (s.kind === 'link') return link(url, cls, label, srLabel);
-    var b = el('button', cls);
-    b.type = 'button';
-    b.innerHTML = PLAY;
-    b.appendChild(document.createTextNode(label));
-    b.setAttribute('aria-label', srLabel.replace(' (opens video player)', ''));
-    b.addEventListener('click', function () {
-      var box = el('div', 'screen');
-      if (s.kind === 'youtube') {
-        var f = document.createElement('iframe');
-        f.src = 'https://www.youtube-nocookie.com/embed/' + s.id + '?autoplay=1&rel=0&playsinline=0&cc_load_policy=1';
-        f.title = title;
-        f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
-        f.allowFullscreen = true;
-        box.appendChild(f);
-      } else {
-        var v = document.createElement('video');
-        v.src = s.src; v.controls = true; v.preload = 'auto';
-        v.setAttribute('aria-label', title);
-        box.appendChild(v);
-        var p = v.play(); if (p && p.catch) p.catch(function () {});
-      }
-      var back = el('a', 'open-out', 'Trouble playing? Open the video in a new window');
-      back.href = url; back.target = '_blank'; back.rel = 'noopener';
-      b.replaceWith(box);
-      box.after(back);
-      (box.querySelector('video, iframe')).focus();
-    });
-    return b;
+    if (s.kind === 'link') { window.open(url, '_blank', 'noopener'); return; }
+    screen.replaceChildren();
+    if (s.kind === 'youtube') {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + s.id + '?autoplay=1&rel=0&cc_load_policy=1';
+      f.title = title;
+      f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+      f.allowFullscreen = true;
+      f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0';
+      screen.appendChild(f);
+      f.focus();
+      return;
+    }
+    var v = document.createElement('video');
+    v.src = s.src; v.controls = true; v.preload = 'auto';
+    v.setAttribute('aria-label', title);
+    screen.appendChild(v);
+    v.focus();
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+    if (fallback && !fallback.isConnected) screen.after(fallback);
   }
 
   var list = document.getElementById('film-list');
   FILMS.forEach(function (f, i) {
     var li = el('li', 'film');
     li.id = 'film-' + (i + 1);
+    li.appendChild(el('span', 'tag', 'Film ' + (i + 1) + ' of ' + FILMS.length));
+
+    var screen = el('div', 'screen');
+    if (f.poster) screen.style.backgroundImage = 'url("' + f.poster + '")';
+    li.appendChild(screen);
+
     li.appendChild(el('h3', null, f.title));
-    li.appendChild(el('p', 'length', f.length));
+    li.appendChild(el('p', 'meta', f.length));
     if (f.who) li.appendChild(el('p', 'who', f.who));
     li.appendChild(el('p', 'about', f.about));
+
     var actions = el('div', 'actions');
-    if (f.watch) {
-      actions.appendChild(player(f.watch, 'btn', 'Play video',
-        'Play video: ' + f.title + ' (opens video player)', f.title));
+    if (f.video) {
+      var fallback = el('a', null, 'Trouble playing? Open the video in a new window');
+      fallback.href = f.video; fallback.target = '_blank'; fallback.rel = 'noopener';
+      fallback.style.cssText = 'font-size:0.85em;min-height:44px;display:flex;align-items:center';
+
+      var big = el('button', 'big-play');
+      big.type = 'button';
+      big.setAttribute('aria-label', 'Play ' + f.title);
+      big.innerHTML = '<span>' + PLAY + '</span>';
+      screen.appendChild(big);
+
+      var btn = el('button', 'btn');
+      btn.type = 'button';
+      btn.innerHTML = PLAY;
+      btn.appendChild(document.createTextNode('Play video'));
+      btn.setAttribute('aria-label', 'Play video: ' + f.title);
+      var go = function () { play(screen, f.video, f.title, fallback); };
+      big.addEventListener('click', go);
+      btn.addEventListener('click', go);
+      actions.appendChild(btn);
+
+      if (f.described) {
+        var ad = el('button', 'btn secondary');
+        ad.type = 'button';
+        ad.innerHTML = PLAY;
+        ad.appendChild(document.createTextNode('Play with audio description'));
+        ad.setAttribute('aria-label', 'Play ' + f.title + ' with audio description');
+        ad.addEventListener('click', function () {
+          play(screen, f.described, f.title + ', audio described', fallback);
+          fallback.href = f.described;
+          screen.scrollIntoView({ block: 'center' });
+        });
+        actions.appendChild(ad);
+      }
     } else {
       actions.appendChild(el('p', 'btn pending', 'Video coming soon'));
-    }
-    if (f.described) {
-      actions.appendChild(player(f.described, 'btn secondary', 'Play with audio description',
-        'Play ' + f.title + ' with audio description (opens video player)', f.title + ', audio described'));
     }
     li.appendChild(actions);
     list.appendChild(li);
   });
 
-  var prog = document.getElementById('program-list');
+  var sched = document.getElementById('schedule');
   PROGRAM.forEach(function (p) {
     var li = el('li');
-    if (p.time) li.appendChild(el('p', 'time', p.time));
-    li.appendChild(el('p', 'item', p.item));
-    if (p.film) {
+    li.appendChild(el('span', 'time', p.time));
+    var lines = el('div', 'lines');
+    lines.appendChild(el('p', 'item', p.item));
+    p.details.forEach(function (d) { lines.appendChild(el('p', 'detail', d)); });
+    if (p.films) {
       var d = el('p', 'detail');
-      d.appendChild(document.createTextNode((p.detail || 'Film') + ' · '));
-      var a = el('a', null, 'Watch it');
-      a.href = '#film-' + p.film;
-      a.setAttribute('aria-label', 'Watch ' + p.item);
-      d.appendChild(a);
-      li.appendChild(d);
-    } else if (p.detail) {
-      li.appendChild(el('p', 'detail', p.detail));
+      d.appendChild(document.createTextNode('Watch: '));
+      p.films.forEach(function (n, k) {
+        if (k) d.appendChild(document.createTextNode(', '));
+        var a = el('a', null, FILMS[n - 1].title);
+        a.href = '#film-' + n;
+        d.appendChild(a);
+      });
+      lines.appendChild(d);
     }
-    prog.appendChild(li);
+    li.appendChild(lines);
+    sched.appendChild(li);
   });
 
   var sp = document.getElementById('sponsor-list');
   SPONSORS.forEach(function (s) {
-    var d = el('div', 'sponsor-tier');
-    d.appendChild(el('p', 'tier', s.tier));
-    d.appendChild(el('p', 'names', s.names));
+    var d = el('div', 'tier' + (s.lead ? ' lead' : ''));
+    d.appendChild(el('h3', 'tier-name', s.tier));
+    var ul = el('ul');
+    s.names.forEach(function (n) { ul.appendChild(el('li', null, n)); });
+    d.appendChild(ul);
     sp.appendChild(d);
   });
 
@@ -474,18 +601,17 @@ var SPONSORS = [
   function save() { try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch (e) {} }
   function apply() {
     if (prefs.size && prefs.size !== '1') root.setAttribute('data-size', prefs.size); else root.removeAttribute('data-size');
-    if (prefs.theme === 'light' || prefs.theme === 'dark') root.setAttribute('data-theme', prefs.theme); else root.removeAttribute('data-theme');
-    document.querySelectorAll('[data-size]').forEach(function (b) {
-      if (b === root) return;
-      b.setAttribute('aria-pressed', String((prefs.size || '1') === b.dataset.size));
+    if (prefs.theme === 'light') root.setAttribute('data-theme', 'light'); else root.removeAttribute('data-theme');
+    document.querySelectorAll('[data-size-choice]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String((prefs.size || '1') === b.dataset.sizeChoice));
     });
     document.querySelectorAll('[data-theme-choice]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String((prefs.theme || 'auto') === b.dataset.themeChoice));
+      b.setAttribute('aria-pressed', String((prefs.theme || 'gala') === b.dataset.themeChoice));
     });
   }
   document.getElementById('display-options').addEventListener('click', function (e) {
-    var s = e.target.closest('button[data-size]'), t = e.target.closest('button[data-theme-choice]');
-    if (s) { prefs.size = s.dataset.size; save(); apply(); }
+    var s = e.target.closest('[data-size-choice]'), t = e.target.closest('[data-theme-choice]');
+    if (s) { prefs.size = s.dataset.sizeChoice; save(); apply(); }
     if (t) { prefs.theme = t.dataset.themeChoice; save(); apply(); }
   });
   apply();
