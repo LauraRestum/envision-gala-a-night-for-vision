@@ -14,9 +14,18 @@
 html, body { height: 100%; }
 body { margin: 0; background: #0b0b0c; color: #fff; font: 400 1.25rem/1.5 'Montserrat', Arial, sans-serif; display: flex; flex-direction: column; }
 :focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+/* Header like the gala signs: maroon gradient, bold wide title, red bar beneath. */
+.gala-top {
+  text-align: center; border-bottom: 5px solid var(--red);
+  background: linear-gradient(180deg, #2a0a0d, #5b141a);
+  padding: calc(env(safe-area-inset-top, 0px) + 0.8rem) 16px 0.75rem;
+}
+.gala-top p { margin: 0; text-transform: uppercase; }
+.gala-top .name { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.14em; }
+.gala-top .sub { font-weight: 400; font-size: 0.75rem; letter-spacing: 0.3em; }
 .top {
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  padding: calc(env(safe-area-inset-top, 0px) + 0.75rem) max(16px, env(safe-area-inset-right, 0px)) 0.75rem max(16px, env(safe-area-inset-left, 0px));
+  padding: 0.5rem max(16px, env(safe-area-inset-right, 0px)) 0.5rem max(16px, env(safe-area-inset-left, 0px));
 }
 .top a { color: #fff; font-weight: 600; font-size: 1rem; min-height: 48px; display: flex; align-items: center; }
 .count { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
@@ -29,7 +38,7 @@ body { margin: 0; background: #0b0b0c; color: #fff; font: 400 1.25rem/1.5 'Monts
 }
 .nav button {
   min-height: 60px; border-radius: 4px; cursor: pointer; font: 700 1.05rem 'Montserrat', Arial, sans-serif;
-  letter-spacing: 0.12em; text-transform: uppercase; border: 2px solid #fff; background: transparent; color: #fff;
+  letter-spacing: 0.12em; text-transform: uppercase; border: 2px solid #fff; background: transparent; border-radius: 2px; color: #fff;
 }
 .nav button.next { background: var(--red); border-color: var(--red); }
 .nav button:disabled { opacity: 0.35; cursor: default; }
@@ -38,6 +47,10 @@ body { margin: 0; background: #0b0b0c; color: #fff; font: 400 1.25rem/1.5 'Monts
 </style>
 </head>
 <body>
+<header class="gala-top">
+  <p class="name">A Night for Vision</p>
+  <p class="sub">Envision Gala</p>
+</header>
 <div class="top">
   <a href="index.html">&larr; Back to the films</a>
   <span class="count" id="count" aria-live="polite"></span>
