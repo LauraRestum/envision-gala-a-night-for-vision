@@ -12,24 +12,20 @@ films and see the program. It is plain HTML with no build step.
 Every push to the production branch redeploys automatically. Other branches get
 their own preview link.
 
-## Updating the page
+## What's here
 
-All content is in one block near the bottom of `index.html`, between
-`CONTENT` and `END CONTENT`:
-
-- `FILMS`: title, length, who appears, a short description, the video and
-  its poster image. Videos live in `videos/` and Vercel serves them, so they
-  play right on the page. `described` is the audio-described cut, if any.
-  A YouTube, Dropbox ("Anyone with the link") or `.mp4` link also works.
-  An empty `video` shows "Video coming soon".
-- `PROGRAM`: the evening in order, from the printed program (V4, October 15).
-  `films: [2, 3]` adds "Watch" links to those films.
-- `SPONSORS`: tier and names, from the printed program.
+- `index.html`: the films, plus a big "View the program" button.
+  The film list (title, length, file name) is the `FILMS` block in the script.
+- `program.html`: the printed program, one page at a time, with Back and Next
+  buttons. Pages are `program/page-01.jpg` to `page-20.jpg`; each page's
+  description for screen readers is in the `PAGES` list.
 
 ## Videos
 
 The files in `videos/` are 960x540 H.264 copies made for phones. The full
 quality masters stay in Dropbox under `Gala Video Production`:
+
+Posters are the matching `.jpg` files.
 
 | File | Source |
 |---|---|
