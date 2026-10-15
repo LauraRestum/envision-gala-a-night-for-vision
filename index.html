@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Night for Vision</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Watch the films and see the program from A Night for Vision, the Envision Gala, October 24, 2026, at the Wichita Art Museum.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="A Night for Vision | Envision Gala 2026">
+<meta property="og:description" content="Watch the films and see the program from the Envision Gala.">
+<meta name="theme-color" content="#002855">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<script>
+/* Restore display choices before paint so nothing flashes. */
+(function(){try{
+  var p = JSON.parse(localStorage.getItem('anfv-display') || '{}');
+  var r = document.documentElement;
+  if (p.theme === 'light' || p.theme === 'dark') r.setAttribute('data-theme', p.theme);
+  if (p.size) r.setAttribute('data-size', p.size);
+}catch(e){}})();
+</script>
+<style>
+/* Layout: one calm column, big type, two sections (Films, Program) reached from a sticky two-button bar.
+   Built for older guests on phones: 20px base text, 64px buttons, nothing hidden behind gestures. */
+:root {
+  --bg: #f4f6f9;          /* page ground, cool navy-tinted white */
+  --surface: #ffffff;     /* cards */
+  --ink: #002855;         /* Envision navy, 14.6:1 on white */
+  --muted: #53565A;       /* charcoal, 7.4:1 on white */
+  --accent: #003087;      /* primary blue: buttons, links */
+  --on-accent: #ffffff;   /* 11.9:1 on accent */
+  --band: #002855;        /* hero band */
+  --on-band: #ffffff;
+  --on-band-muted: rgba(255,255,255,0.82);
+  --point: #C8102E;       /* gala red point, decorative only */
+  --rule: rgba(0,40,85,0.14);
+  --soft: #e8edf4;        /* disabled / quiet fills */
+  --focus: #003087;
+  --font: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --base: 1.25rem;        /* 20px body */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000d2e; --surface: #001852; --ink: #f0f4ff; --muted: rgba(240,244,255,0.78);
+    --accent: #78BE21; --on-accent: #001852; --band: #001852; --on-band: #f0f4ff;
+    --on-band-muted: rgba(240,244,255,0.82); --point: #FF6B3D; --rule: rgba(255,255,255,0.16);
+    --soft: rgba(255,255,255,0.08); --focus: #78BE21; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #000d2e; --surface: #001852; --ink: #f0f4ff; --muted: rgba(240,244,255,0.78);
+  --accent: #78BE21; --on-accent: #001852; --band: #001852; --on-band: #f0f4ff;
+  --on-band-muted: rgba(240,244,255,0.82); --point: #FF6B3D; --rule: rgba(255,255,255,0.16);
+  --soft: rgba(255,255,255,0.08); --focus: #78BE21; color-scheme: dark;
+}
+:root[data-size="2"] { --base: 1.45rem; }
+:root[data-size="3"] { --base: 1.7rem; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 6.5rem; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font); font-size: var(--base); line-height: 1.6; font-weight: 500;
+}
+.wrap {
+  max-width: 40rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { line-height: 1.2; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.skip-link {
+  position: absolute; left: 1rem; top: -200px; z-index: 50;
+  background: var(--accent); color: var(--on-accent); padding: 0.8rem 1.2rem;
+  font-weight: 700; border-radius: 6px; text-decoration: none;
+}
+.skip-link:focus { top: calc(env(safe-area-inset-top, 0px) + 0.5rem); }
+
+/* Hero */
+.hero { background: var(--band); color: var(--on-band); }
+.hero .wrap { padding-block: 2.25rem 2rem; display: grid; gap: 0.9rem; }
+.eyebrow {
+  font-size: 0.8em; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--on-band-muted);
+}
+.hero h1 { font-size: 2.1em; font-weight: 800; letter-spacing: -0.01em; }
+/* The gala's thin white line ending in a red point. */
+.line-point { display: flex; align-items: center; width: 7rem; }
+.line-point::before { content: ""; flex: 1; height: 2px; background: var(--on-band); }
+.line-point::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--point); }
+.hero .when { font-size: 1em; font-weight: 600; }
+.hero .intro { color: var(--on-band-muted); font-size: 0.95em; }
+
+/* Sticky section bar */
+.jump {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: var(--bg); border-bottom: 1px solid var(--rule);
+}
+.jump .wrap { padding-block: 0.6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.jump a {
+  display: flex; align-items: center; justify-content: center; min-height: 56px;
+  border-radius: 10px; border: 2px solid var(--accent); color: var(--accent);
+  font-weight: 700; font-size: 1em; text-decoration: none; background: var(--surface);
+}
+.jump a[aria-current="true"] { background: var(--accent); color: var(--on-accent); }
+
+/* Display options */
+.options { margin-top: 1.25rem; }
+.options summary {
+  cursor: pointer; font-weight: 600; font-size: 0.85em; color: var(--muted);
+  min-height: 48px; display: flex; align-items: center; gap: 0.5rem; list-style: none;
+}
+.options summary::-webkit-details-marker { display: none; }
+.options summary::before { content: "+"; font-weight: 800; font-size: 1.2em; width: 1em; color: var(--accent); }
+.options[open] summary::before { content: "\2212"; }
+.opt-panel { display: grid; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; }
+.opt-group { display: grid; gap: 0.5rem; }
+.opt-label { font-size: 0.8em; font-weight: 700; color: var(--muted); }
+.opt-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.opt-row button {
+  font: inherit; font-size: 0.9em; font-weight: 700; min-height: 52px; min-width: 64px;
+  padding: 0 1rem; border-radius: 8px; cursor: pointer;
+  background: var(--surface); color: var(--ink); border: 2px solid var(--rule);
+}
+.opt-row button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+/* Sections */
+main section { padding-block: 2.25rem 0.5rem; }
+.section-head { display: grid; gap: 0.4rem; margin-bottom: 1.25rem; }
+.section-head h2 { font-size: 1.6em; font-weight: 800; }
+.section-head p { color: var(--muted); font-size: 0.95em; }
+
+.films { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+.film {
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 14px;
+  padding: 1.25rem; display: grid; gap: 0.75rem;
+}
+.film h3 { font-size: 1.25em; font-weight: 800; }
+.film .length { font-size: 0.85em; font-weight: 700; color: var(--muted); }
+.film .who { font-size: 0.9em; font-weight: 600; }
+.film .about { font-size: 0.95em; color: var(--muted); }
+.film .actions { display: grid; gap: 0.6rem; margin-top: 0.25rem; }
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+  min-height: 64px; padding: 0.5rem 1.25rem; border-radius: 12px;
+  background: var(--accent); color: var(--on-accent); text-decoration: none;
+  font-weight: 800; font-size: 1.05em; text-align: center;
+}
+.btn svg { flex: none; width: 1.3em; height: 1.3em; fill: currentColor; }
+.btn.secondary { background: transparent; color: var(--accent); border: 2px solid var(--accent); font-size: 0.95em; min-height: 56px; }
+.btn.pending { background: var(--soft); color: var(--muted); font-weight: 600; font-size: 0.9em; border: 0; }
+button.btn { width: 100%; border: 0; font-family: inherit; cursor: pointer; }
+button.btn.secondary { border: 2px solid var(--accent); }
+.screen { position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; }
+.screen video, .screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.open-out { font-size: 0.85em; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+
+.tip {
+  margin-top: 1.25rem; padding: 1rem 1.1rem; border-radius: 12px;
+  background: var(--soft); font-size: 0.9em; display: grid; gap: 0.4rem;
+}
+.tip strong { font-weight: 800; }
+
+/* Program */
+.program { list-style: none; margin: 0; padding: 0; border-left: 3px solid var(--rule); }
+.program li { position: relative; padding: 0 0 1.4rem 1.25rem; display: grid; gap: 0.2rem; }
+.program li::before {
+  content: ""; position: absolute; left: -9px; top: 0.45em; width: 15px; height: 15px;
+  border-radius: 50%; background: var(--bg); border: 3px solid var(--accent);
+}
+.program .time { font-size: 0.85em; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.program .item { font-weight: 800; font-size: 1.05em; }
+.program .detail { font-size: 0.9em; color: var(--muted); }
+.program a { font-weight: 700; }
+
+.sponsors { display: grid; gap: 1rem; margin-top: 1rem; }
+.sponsor-tier { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 1.1rem 1.25rem; display: grid; gap: 0.2rem; }
+.sponsor-tier .tier { font-size: 0.75em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.sponsor-tier .names { font-weight: 800; font-size: 1.1em; }
+
+footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); }
+footer .wrap { padding-block: 1.75rem 2.5rem; display: grid; gap: 0.6rem; font-size: 0.9em; color: var(--muted); }
+footer .org { font-weight: 800; color: var(--ink); letter-spacing: 0.14em; text-transform: uppercase; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#films">Skip to the films</a>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Envision Gala 2026</p>
+    <h1>A Night for Vision</h1>
+    <div class="line-point" aria-hidden="true"></div>
+    <p class="when">October 24, 2026 &middot; Wichita Art Museum</p>
+    <p class="intro">Thank you for being part of the evening. Here you can watch the films from the gala and look back at the program, anytime, right from your phone.</p>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Sections">
+  <div class="wrap">
+    <a href="#films" data-jump="films">Watch the films</a>
+    <a href="#program" data-jump="program">See the program</a>
+  </div>
+</nav>
+
+<main id="main">
+  <div class="wrap">
+    <details class="options" id="display-options">
+      <summary>Make the text bigger or change colors</summary>
+      <div class="opt-panel">
+        <div class="opt-group" role="group" aria-labelledby="size-label">
+          <span class="opt-label" id="size-label">Text size</span>
+          <div class="opt-row">
+            <button type="button" data-size="1" aria-pressed="true">Normal</button>
+            <button type="button" data-size="2" aria-pressed="false">Large</button>
+            <button type="button" data-size="3" aria-pressed="false">Largest</button>
+          </div>
+        </div>
+        <div class="opt-group" role="group" aria-labelledby="theme-label">
+          <span class="opt-label" id="theme-label">Colors</span>
+          <div class="opt-row">
+            <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+            <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+            <button type="button" data-theme-choice="auto" aria-pressed="true">Match my phone</button>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <section id="films" aria-labelledby="films-title">
+      <div class="section-head">
+        <h2 id="films-title">The films</h2>
+        <p>Five short films shown during the program. Tap a button to watch. Each one opens in your phone's video player.</p>
+      </div>
+      <ol class="films" id="film-list"></ol>
+
+      <div class="tip">
+        <strong>Tips for watching</strong>
+        <p>Turn your phone sideways for a bigger picture.</p>
+        <p>Tap the screen once to show the pause and volume controls.</p>
+        <p>When you are done, use your phone's back button or the "Done" button to come back here.</p>
+      </div>
+    </section>
+
+    <section id="program" aria-labelledby="program-title">
+      <div class="section-head">
+        <h2 id="program-title">The program</h2>
+        <p>The order of the evening.</p>
+      </div>
+      <ol class="program" id="program-list"></ol>
+
+      <h3 class="section-head" style="font-size:1.2em;font-weight:800;margin-top:1.5rem;margin-bottom:0">Thank you to our sponsors</h3>
+      <div class="sponsors" id="sponsor-list"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="org">Envision</p>
+    <p>Envision improves the quality of life and provides inspiration and opportunity for people who are blind or have low vision through employment, outreach, rehabilitation, education and research.</p>
+    <p><a href="https://www.envisionus.com/">Visit the Envision website</a></p>
+  </div>
+</footer>
+
+<script>
+/* ===================== CONTENT =====================
+   Edit this block to update the page. Nothing else needs to change.
+
+   FILM LINKS: paste a public link into `watch` (and `described` for an
+   audio-described cut). These play right on the page:
+     - YouTube (unlisted is fine), e.g. https://youtu.be/XXXXXXXXXXX
+     - Dropbox, shared as "Anyone with the link" (paste the link as copied)
+     - a direct .mp4 address
+   Any other link (Vimeo, Google Drive) opens in a new tab instead.
+   Leave a link empty ("") and the film shows "Video coming soon".
+*/
+var FILMS = [
+  {
+    title: "Heather's Camp",
+    length: "About 1½ minutes",
+    who: "",
+    about: "A summer at Heather's Camp, where kids who are blind or have low vision spend a week trying new things alongside friends who get it.",
+    watch: "",
+    described: ""
+  },
+  {
+    title: "Level Up",
+    length: "About 1½ minutes",
+    who: "",
+    about: "Level Up helps teens who are blind or have low vision build independence and get ready for life after high school.",
+    watch: "",
+    described: ""
+  },
+  {
+    title: "Water Street",
+    length: "About 1½ minutes",
+    who: "With Michael Monteferrante, Envision CEO",
+    about: "A look inside the renovated and expanded Water Street campus in Wichita, and what the new spaces make possible.",
+    watch: "",
+    described: ""
+  },
+  {
+    title: "Full Circle",
+    length: "About 1½ minutes",
+    who: "With Adah and Ms. Teresa, Envision Child Development Center",
+    about: "Adah started at the Envision Child Development Center as a little girl. This summer she came back as a volunteer intern to help the next group of children.",
+    watch: "",
+    described: ""
+  },
+  {
+    title: "Three Lives, One Story",
+    length: "About 4 minutes",
+    who: "With Aubree, Hashim and Steve",
+    about: "Aubree is 13. Hashim just graduated from college. Steve has been part of Envision for about 25 years. Three people at three stages of life, all grown up inside Envision programs.",
+    watch: "",
+    described: ""
+  }
+];
+
+/* PROGRAM: one entry per moment of the evening, in order.
+   `time` is optional. Add `film: <number>` (1 to 5, matching the list above)
+   to link a program moment to its film. */
+var PROGRAM = [
+  { time: "", item: "Cocktail hour", detail: "" },
+  { time: "", item: "Welcome", detail: "" },
+  { time: "", item: "Dinner", detail: "" },
+  { time: "", item: "Heather's Camp", detail: "Film", film: 1 },
+  { time: "", item: "Level Up", detail: "Film", film: 2 },
+  { time: "", item: "Water Street", detail: "Film", film: 3 },
+  { time: "", item: "Full Circle", detail: "Film", film: 4 },
+  { time: "", item: "Three Lives, One Story", detail: "Film", film: 5 },
+  { time: "", item: "Closing", detail: "" }
+];
+
+var SPONSORS = [
+  { tier: "Presenting sponsor", names: "HighTouch Technologies" },
+  { tier: "Platinum sponsor", names: "Forvis Mazars" },
+  { tier: "Gold sponsor", names: "INTRUST Bank" }
+];
+/* =================== END CONTENT =================== */
+
+(function () {
+  var PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l11-6.5a1 1 0 0 0 0-1.72l-11-6.5A1 1 0 0 0 8 5.5z"/></svg>';
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text) e.textContent = text;
+    return e;
+  }
+  function link(href, cls, label, srLabel) {
+    var a = el('a', cls);
+    a.href = href; a.target = '_blank'; a.rel = 'noopener';
+    a.innerHTML = PLAY;
+    a.appendChild(document.createTextNode(label));
+    if (srLabel) a.setAttribute('aria-label', srLabel);
+    return a;
+  }
+
+  /* Work out how a link can play right on the page.
+     YouTube -> privacy-enhanced embed. Dropbox or a direct .mp4 -> the phone's
+     own video player. Anything else (Vimeo page, etc.) opens in a new tab. */
+  function source(url) {
+    var m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/);
+    if (m) return { kind: 'youtube', id: m[1] };
+    if (/dropbox\.com\//.test(url)) {
+      var u = url.replace(/([?&])dl=0(&|$)/, '$1').replace(/[?&]$/, '');
+      u += (u.indexOf('?') > -1 ? '&' : '?') + 'raw=1';
+      return { kind: 'file', src: u };
+    }
+    if (/\.(mp4|m4v|mov|webm)(\?|#|$)/i.test(url)) return { kind: 'file', src: url };
+    return { kind: 'link' };
+  }
+
+  /* A big Play button that turns into the video when tapped. Nothing loads
+     until then, so the page stays fast on a phone. */
+  function player(url, cls, label, srLabel, title) {
+    var s = source(url);
+    if (s.kind === 'link') return link(url, cls, label, srLabel);
+    var b = el('button', cls);
+    b.type = 'button';
+    b.innerHTML = PLAY;
+    b.appendChild(document.createTextNode(label));
+    b.setAttribute('aria-label', srLabel.replace(' (opens video player)', ''));
+    b.addEventListener('click', function () {
+      var box = el('div', 'screen');
+      if (s.kind === 'youtube') {
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + s.id + '?autoplay=1&rel=0&playsinline=0&cc_load_policy=1';
+        f.title = title;
+        f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+        f.allowFullscreen = true;
+        box.appendChild(f);
+      } else {
+        var v = document.createElement('video');
+        v.src = s.src; v.controls = true; v.preload = 'auto';
+        v.setAttribute('aria-label', title);
+        box.appendChild(v);
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+      }
+      var back = el('a', 'open-out', 'Trouble playing? Open the video in a new window');
+      back.href = url; back.target = '_blank'; back.rel = 'noopener';
+      b.replaceWith(box);
+      box.after(back);
+      (box.querySelector('video, iframe')).focus();
+    });
+    return b;
+  }
+
+  var list = document.getElementById('film-list');
+  FILMS.forEach(function (f, i) {
+    var li = el('li', 'film');
+    li.id = 'film-' + (i + 1);
+    li.appendChild(el('h3', null, f.title));
+    li.appendChild(el('p', 'length', f.length));
+    if (f.who) li.appendChild(el('p', 'who', f.who));
+    li.appendChild(el('p', 'about', f.about));
+    var actions = el('div', 'actions');
+    if (f.watch) {
+      actions.appendChild(player(f.watch, 'btn', 'Play video',
+        'Play video: ' + f.title + ' (opens video player)', f.title));
+    } else {
+      actions.appendChild(el('p', 'btn pending', 'Video coming soon'));
+    }
+    if (f.described) {
+      actions.appendChild(player(f.described, 'btn secondary', 'Play with audio description',
+        'Play ' + f.title + ' with audio description (opens video player)', f.title + ', audio described'));
+    }
+    li.appendChild(actions);
+    list.appendChild(li);
+  });
+
+  var prog = document.getElementById('program-list');
+  PROGRAM.forEach(function (p) {
+    var li = el('li');
+    if (p.time) li.appendChild(el('p', 'time', p.time));
+    li.appendChild(el('p', 'item', p.item));
+    if (p.film) {
+      var d = el('p', 'detail');
+      d.appendChild(document.createTextNode((p.detail || 'Film') + ' · '));
+      var a = el('a', null, 'Watch it');
+      a.href = '#film-' + p.film;
+      a.setAttribute('aria-label', 'Watch ' + p.item);
+      d.appendChild(a);
+      li.appendChild(d);
+    } else if (p.detail) {
+      li.appendChild(el('p', 'detail', p.detail));
+    }
+    prog.appendChild(li);
+  });
+
+  var sp = document.getElementById('sponsor-list');
+  SPONSORS.forEach(function (s) {
+    var d = el('div', 'sponsor-tier');
+    d.appendChild(el('p', 'tier', s.tier));
+    d.appendChild(el('p', 'names', s.names));
+    sp.appendChild(d);
+  });
+
+  /* Display options, remembered on this phone only. */
+  var root = document.documentElement, KEY = 'anfv-display', prefs = {};
+  try { prefs = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { prefs = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch (e) {} }
+  function apply() {
+    if (prefs.size && prefs.size !== '1') root.setAttribute('data-size', prefs.size); else root.removeAttribute('data-size');
+    if (prefs.theme === 'light' || prefs.theme === 'dark') root.setAttribute('data-theme', prefs.theme); else root.removeAttribute('data-theme');
+    document.querySelectorAll('[data-size]').forEach(function (b) {
+      if (b === root) return;
+      b.setAttribute('aria-pressed', String((prefs.size || '1') === b.dataset.size));
+    });
+    document.querySelectorAll('[data-theme-choice]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String((prefs.theme || 'auto') === b.dataset.themeChoice));
+    });
+  }
+  document.getElementById('display-options').addEventListener('click', function (e) {
+    var s = e.target.closest('button[data-size]'), t = e.target.closest('button[data-theme-choice]');
+    if (s) { prefs.size = s.dataset.size; save(); apply(); }
+    if (t) { prefs.theme = t.dataset.themeChoice; save(); apply(); }
+  });
+  apply();
+
+  /* Highlight the section you are in. */
+  var jumps = document.querySelectorAll('[data-jump]');
+  function mark(id) { jumps.forEach(function (a) { a.setAttribute('aria-current', String(a.dataset.jump === id)); }); }
+  mark('films');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) mark(en.target.id); });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    ['films', 'program'].forEach(function (id) { obs.observe(document.getElementById(id)); });
+  }
+})();
+</script>
+</body>
+</html>
