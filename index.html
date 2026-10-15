@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#0b0b0c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Allura&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Allison&display=swap">
 <style>
 /* Gala look: black with the red glow, wide-spaced Montserrat, red points. Big text and buttons. */
 :root { --bg: #0b0b0c; --red: #d6232b; --red-text: #ff5a61; --frame: rgba(255,255,255,0.22); color-scheme: dark; }
@@ -20,19 +20,34 @@ body { margin: 0; background: var(--bg); color: #fff; font: 400 1.25rem/1.55 'Mo
 h1, h2, p { margin: 0; }
 :focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 
-.hero { background: #000 url("assets/gala-glow.jpg") center / cover; text-align: center; }
-.hero .wrap { padding-block: 2rem 2.25rem; display: grid; gap: 0.6rem; justify-items: center; }
-.logo { width: 9rem; height: auto; }
-.welcome { font-family: 'Allura', cursive; font-size: 4rem; line-height: 1; margin-top: 0.4rem; }
-h1 { font-size: 1.5rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
-.when { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
-.line { display: flex; align-items: center; width: 100%; max-width: 20rem; }
-.line::before { content: ""; flex: 1; height: 2px; background: #fff; }
-.line::after { content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--red); }
+/* Top of the page, laid out like the gala's welcome slide and signs:
+   logos in the corners, script Welcome, bold wide title, light caps, thin red rule. */
+.hero {
+  text-align: center;
+  background:
+    linear-gradient(160deg, rgba(110,14,20,0.55), rgba(0,0,0,0) 55%),
+    #000 url("assets/gala-glow.jpg") center / cover;
+}
+.hero .wrap { padding-block: calc(env(safe-area-inset-top, 0px) + 1.25rem) 2.25rem; }
+.corners { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; text-align: left; }
+.corners .logo { width: 7.5rem; height: auto; display: block; margin-top: 0.35rem; }
+.presented { display: grid; justify-items: end; gap: 0.35rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; }
+.presented img { width: 6.5rem; height: auto; display: block; }
+.title { display: grid; justify-items: center; margin-top: 1.25rem; }
+.welcome { font-family: 'Allison', 'Snell Roundhand', cursive; font-weight: 400; font-size: 6.25rem; line-height: 0.85; }
+.to { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 0.25rem; }
+h1 { font-size: 1.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.2; margin-top: 0.2rem; }
+.gala { font-size: 1.05rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 0.15rem; }
+.rule { width: 7rem; height: 1px; background: var(--red); margin: 1.1rem auto; }
+.support { font-size: 0.85rem; font-weight: 300; letter-spacing: 0.24em; text-transform: uppercase; line-height: 1.7; }
+.when { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 1rem; color: rgba(255,255,255,0.85); }
+.band { background: linear-gradient(90deg, #7a0a10, var(--red) 50%, #7a0a10); text-align: center; }
+.band .wrap { padding-block: 0.7rem; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.16em; white-space: nowrap; text-transform: uppercase; }
+@media (max-width: 360px) { .welcome { font-size: 5.25rem; } h1 { font-size: 1.4rem; } }
 
 .btn {
   display: flex; align-items: center; justify-content: center; gap: 0.7rem; width: 100%; min-height: 68px;
-  padding: 0.5rem 1.25rem; border: 0; border-radius: 4px; cursor: pointer; text-decoration: none;
+  padding: 0.5rem 1.25rem; border: 0; border-radius: 2px; cursor: pointer; text-decoration: none;
   background: var(--red); color: #fff; font: 700 1rem 'Montserrat', Arial, sans-serif; letter-spacing: 0.12em; text-transform: uppercase;
 }
 .btn svg { width: 1.4em; height: 1.4em; fill: currentColor; flex: none; }
@@ -48,20 +63,29 @@ main h2::after { content: ""; display: block; width: 3rem; height: 3px; backgrou
 .film .len { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red-text); }
 @media (max-width: 400px) { .film { grid-template-columns: 45% 1fr; gap: 0.85rem; } .film h3 { font-size: 1rem; } }
 
-footer { margin-top: 3rem; background: linear-gradient(90deg, #7a0a10, var(--red) 50%, #7a0a10); text-align: center; }
-footer .wrap { padding-block: 1rem calc(env(safe-area-inset-bottom, 0px) + 1rem); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; }
+footer { margin-top: 3rem; }
+footer .band .wrap { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.9rem); }
 </style>
 </head>
 <body>
 <header class="hero">
   <div class="wrap">
-    <img class="logo" src="assets/envision-logo-white.png" alt="Envision" width="647" height="144">
-    <p class="welcome" aria-hidden="true">Welcome</p>
-    <h1>A Night for Vision</h1>
-    <div class="line" aria-hidden="true"></div>
-    <p class="when">October 24, 2026 &middot; Wichita Art Museum</p>
+    <div class="corners">
+      <img class="logo" src="assets/envision-logo-white.png" alt="Envision" width="647" height="144">
+      <div class="presented">Presented by<img src="assets/hightouch-logo-white.png" alt="High Touch Technologies" width="315" height="65"></div>
+    </div>
+    <div class="title">
+      <p class="welcome" aria-hidden="true">Welcome</p>
+      <p class="to" aria-hidden="true">to</p>
+      <h1>A Night for Vision</h1>
+      <p class="gala">Envision Gala</p>
+      <div class="rule" aria-hidden="true"></div>
+      <p class="support">Your support helps make<br>our mission possible</p>
+      <p class="when">October 24, 2026 &middot; Wichita Art Museum</p>
+    </div>
   </div>
 </header>
+<div class="band" aria-hidden="true"><div class="wrap">Envision the Future &middot; Honor the Legacy</div></div>
 
 <main class="wrap">
   <div class="program-btn">
@@ -74,7 +98,7 @@ footer .wrap { padding-block: 1rem calc(env(safe-area-inset-bottom, 0px) + 1rem)
   <ol class="films" id="films"></ol>
 </main>
 
-<footer><div class="wrap">Thank you for supporting our mission</div></footer>
+<footer><div class="band"><div class="wrap">Thank you for supporting our mission</div></div></footer>
 
 <script>
 /* The five films, in the order shown that night. Files are in videos/. */
